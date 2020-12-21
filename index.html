@@ -19,15 +19,24 @@
 </head>
 <body>
     <div id="wrapper">
-        <h1>ToDo List</h1>
-        <input type="text" id="task" autofocus>
-        <button id="add">Add Task</button>
+        <header>
+            <h1>ToDo List</h1>
+            <button class="changeTheme"></button>
+        </header>
+        
+        <div class="group-add-tasks">
+            <input type="text" id="task" autofocus>
+            <div class="group-add-tasks-button">
+                <button id="add"><i class="far fa-plus-square"></i></button>
+            </div>
+        </div>
+
         <div id="todos">
             <ul></ul>
         </div>
     </div>
 
     <!-- JS -->
-    <script src="scripts.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </body>
 </html>
