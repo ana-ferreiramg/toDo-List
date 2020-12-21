@@ -1,5 +1,10 @@
-# ToDo App
+# ToDo List
+## Linguagens Utilizadas
+- HTML
+- CSS
+- JavaScript
 
-<p align="center">
-    <img src="img/ToDoApp.gif" alt="ToDo Gif">
-</p>
+![ToDo List](assets/img/ToDoApp.gif)
+![ToDo List](assets/img/ToDoListMobile.gif)
+
+[ToDo List](https://ana-ferreiramg.github.io/toDo-List)
