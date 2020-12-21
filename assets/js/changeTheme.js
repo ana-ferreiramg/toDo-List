@@ -1,4 +1,4 @@
-const defaultCurrentTheme = () => (localStorage.currentTheme == null) ? localStorage.setItem("currentTheme", "#fff") : console.log("CurrentTheme: light or dark");
+const defaultCurrentTheme = () => (localStorage.currentTheme == null) ? localStorage.setItem("currentTheme", "#fff") : console.log('CurrentTheme: light or dark');
 const iconBtnTheme = document.createElement("i");
 const changeThemeBtn = document.querySelector(".changeTheme");
 
@@ -6,6 +6,9 @@ const darkTheme = "#43506c";
 const lightTheme = "#fff";
 
 defaultCurrentTheme();
+
+iconBtnTheme.classList.add("fas");
+changeThemeBtn.appendChild(iconBtnTheme);
 
 if (localStorage.currentTheme == lightTheme) {
     iconBtnTheme.classList.add("fa-moon");

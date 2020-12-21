@@ -1,73 +1,89 @@
-var listTodos = document.querySelector('#wrapper #todos ul');
-var task = document.querySelector('#wrapper input');
-var add = document.querySelector('#wrapper button');
+const listTodos = document.querySelector('#wrapper #todos ul');
+const task = document.querySelector('#wrapper input');
+const add = document.querySelector('#wrapper .group-add-tasks-button button');
+const inputAddTodo = document.getElementById("task");
 
-var todos = JSON.parse(localStorage.getItem('list_todos')) || [];
+let todos = JSON.parse(localStorage.getItem('list_todos')) || [];
 
-function show() {
+const ID = () => '_' + Math.random().toString(36).substr(2, 9);
+
+function addTodo(item) {
+    if (item !== '' && item != ' ') {
+        const todo = {
+            id: ID(),
+            task: item,
+            completed: false
+        };
+
+        todos.push(todo);
+        saveToStorage(todos);
+
+        task.value = '';
+    }
+}
+add.addEventListener('click', () => addTodo(task.value));
+inputAddTodo.addEventListener('keyup', (e) => e.keyCode === 13 ? addTodo(task.value) : console.log("Not ENTER key"));
+
+function show(todos) {
     listTodos.innerHTML = '';
 
-    for (todo of todos) {
-        var div = document.createElement('div');
-        var todoElement = document.createElement('li');
-        var deleteTodoElement = document.createElement('i');
-        var todoText = document.createTextNode(todo);
+    todos.forEach((item) => {
+        const checked = item.completed ? 'checked': null;
+        const li = document.createElement('li');
 
-        deleteTodoElement.classList.add('fas');
-        deleteTodoElement.classList.add('fa-trash-alt');
+        if (item.completed === true) {
+            li.classList.add('checked');
+        }
 
-        var pos = todos.indexOf(todo);
-        deleteTodoElement.setAttribute('onclick', 'deleteTodo(' + pos + ')');
+        li.innerHTML = `
+            <div data-key=${item.id}>
+                <input type="checkbox" class="checkbox" ${checked}>
+                ${item.task}
+            </div>
 
-        todoElement.appendChild(div);
-        div.appendChild(todoText);
-        listTodos.appendChild(todoElement);
-        todoElement.appendChild(deleteTodoElement);
-    }
+            <div class="delete-button" data-key=${item.id}>
+                <i class="delete-button fas fa-trash-alt"></i>
+            </div>
+        `;
+
+        listTodos.append(li);
+    });
 }
 
-show();
-
-function addTodo() {
-    var todoText = task.value;
-
-    if (todoText !== '' && todoText !== ' ') {
-        todos.push(todoText);
-    }
-
-    task.value = '';
-
-    show();
-    saveToStorage();
-}
-
-add.onclick = addTodo;
-
-var inputAddTodo = document.getElementById("task");
-
-inputAddTodo.addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        addTodo();
-    }
-});
-
-function deleteTodo(pos) {
-    todos.splice(pos, 1);
-
-    show();
-    saveToStorage();
-}
-
-function saveToStorage() {
+function saveToStorage(todos) {
     localStorage.setItem('list_todos', JSON.stringify(todos));
+    show(todos);
 }
 
-var list = document.querySelector('ul');
+function getFromLocalStorage() {
+    const reference = localStorage.getItem('list_todos');
 
-list.addEventListener("click", function(ev) {
-    ev.preventDefault();
-    if (ev.target.tagName === 'DIV') {
-        ev.target.classList.toggle('done');
+    if (reference) {
+        todos = JSON.parse(reference);
+        show(todos);
+    }
+}
+
+function toogle(id) {
+    todos.forEach(item => (item.id == id) ? item.completed = !item.completed : item.completed);
+
+    saveToStorage(todos);
+}
+
+function deleteTodo(id) {
+    todos = todos.filter(item => item.id != id);
+
+    saveToStorage(todos);
+}
+
+getFromLocalStorage();
+
+listTodos.addEventListener("click", (e) => {
+    if (e.target.type === 'checkbox') {
+        toogle(e.target.parentElement.getAttribute('data-key'));
+    }
+
+    if (e.target.classList.contains('delete-button')) {
+        deleteTodo(e.target.parentElement.getAttribute('data-key'));
     }
 });
