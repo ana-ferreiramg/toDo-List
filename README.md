@@ -1,10 +1,12 @@
 # ToDo List
+
+🔰[Usar ToDo List](https://ana-ferreiramg.github.io/toDo-List)
+
 ## 🔰 Linguagens Utilizadas
+
 - HTML
 - CSS
 - JavaScript
 
-![ToDo List](assets/img/ToDoApp.gif)
-![ToDo List](assets/img/ToDoListMobile.gif)
-
-🔰[Usar ToDo List](https://ana-ferreiramg.github.io/toDo-List)
+![ToDo List](.github/ToDoApp.gif)
+![ToDo List](.github/ToDoListMobile.gif)
