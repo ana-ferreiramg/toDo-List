@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>ToDo List</title>
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="favicon/site.webmanifest">
-    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="public/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="public/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="public/favicon/site.webmanifest" />
+    <link rel="mask-icon" href="public/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet" />
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+      crossorigin="anonymous"
+    />
 
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="public/css/normalize.css" />
 
     <!-- CSS STYLES -->
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="public/css/styles.css" />
+  </head>
+  <body>
     <div id="wrapper">
-        <header>
-            <h1>TODO LIST</h1>
-            <button class="changeTheme"></button>
-        </header>
-        
-        <div class="group-add-tasks">
-            <input type="text" id="task" autofocus>
-            <div class="group-add-tasks-button">
-                <button id="add"><i class="far fa-plus-square"></i></button>
-            </div>
-        </div>
+      <header>
+        <h1>TODO LIST</h1>
+        <button class="changeTheme"></button>
+      </header>
 
-        <div id="todos">
-            <ul></ul>
+      <div class="group-add-tasks">
+        <input type="text" id="task" autofocus />
+        <div class="group-add-tasks-button">
+          <button id="add"><i class="far fa-plus-square"></i></button>
         </div>
+      </div>
+
+      <div id="todos">
+        <ul></ul>
+      </div>
     </div>
 
     <!-- JS -->
-    <script src="assets/js/changeTheme.js"></script>
-    <script src="assets/js/scripts.js"></script>
-</body>
+    <script src="public/js/changeTheme.js"></script>
+    <script src="public/js/scripts.js"></script>
+  </body>
 </html>
