@@ -1,51 +1,71 @@
-const defaultCurrentTheme = () => (localStorage.currentTheme == null) ? localStorage.setItem("currentTheme", "#fff") : console.log('CurrentTheme: light or dark');
-const iconBtnTheme = document.createElement("i");
-const changeThemeBtn = document.querySelector(".changeTheme");
-
-const darkTheme = "#43506c";
-const lightTheme = "#fff";
-
+const defaultCurrentTheme = () => (localStorage.currentTheme == null ? localStorage.setItem('currentTheme', '#fff') : 0);
 defaultCurrentTheme();
 
-iconBtnTheme.classList.add("fas");
-changeThemeBtn.appendChild(iconBtnTheme);
+const DARKTHEME = '#43506c';
+const LIGHTTHEME = '#fff';
 
-if (localStorage.currentTheme == lightTheme) {
-    iconBtnTheme.classList.add("fa-moon");
-} else {
-    iconBtnTheme.classList.add("fa-sun");
-}
+const Icon = {
+  change(theme) {
+    const iconBtnTheme = document.querySelector('header i');
+    if (theme === 'light') {
+      iconBtnTheme.classList.add('fa-moon');
+      iconBtnTheme.classList.remove('fa-sun');
+    }
+    if (theme === 'dark') {
+      iconBtnTheme.classList.add('fa-sun');
+      iconBtnTheme.classList.remove('fa-moon');
+    }
+  },
+};
 
-function updateUi() {
+class Theme {
+  constructor(darktheme, lighttheme) {
+    this.DARKTHEME = darktheme;
+    this.LIGHTTHEME = lighttheme;
+  }
+
+  updateUI(theme) {
     const bodyStyle = document.body.style;
-    if(localStorage.currentTheme == darkTheme){
-        bodyStyle.setProperty("--themeColor", darkTheme);
-        bodyStyle.setProperty("--textColor", "#fff");
-        bodyStyle.setProperty("--borderTaskColor", "rgba(255, 255, 255, 0.2)");
-        bodyStyle.setProperty("--bgColorTaskHover", "rgba(255, 255, 255, 0.02)");
-        bodyStyle.setProperty("--colorIconTheme", "rgba(255, 255, 255, 0.4)");
-    } else if(localStorage.currentTheme == lightTheme){
-        bodyStyle.setProperty("--themeColor", lightTheme);
-        bodyStyle.setProperty("--textColor", "#333");
-        bodyStyle.setProperty("--borderTaskColor", "rgba(0, 0, 0, 0.1)");
-        bodyStyle.setProperty("--bgColorTaskHover", "rgba(0, 0, 0, 0.02)");
-        bodyStyle.setProperty("--colorIconTheme", "#43506c");
+    const styles = theme === this.DARKTHEME ? this.dark() : this.light();
+
+    for (let prop in styles) {
+      bodyStyle.setProperty(prop, styles[prop]);
     }
+  }
+
+  light() {
+    const setProperty = {
+      '--themeColor': this.LIGHTTHEME,
+      '--textColor': '#333',
+      '--borderTaskColor': 'rgba(0, 0, 0, 0.1)',
+      '--bgColorTaskHover': 'rgba(0, 0, 0, 0.02)',
+      '--colorIconTheme': '#43506c',
+    };
+
+    Icon.change('light');
+    return setProperty;
+  }
+
+  dark() {
+    const setProperty = {
+      '--themeColor': this.DARKTHEME,
+      '--textColor': '#fff',
+      '--borderTaskColor': 'rgba(255, 255, 255, 0.2)',
+      '--bgColorTaskHover': 'rgba(255, 255, 255, 0.02)',
+      '--colorIconTheme': 'rgba(255, 255, 255, 0.4)',
+    };
+
+    Icon.change('dark');
+    return setProperty;
+  }
 }
-updateUi();
 
+const theme = new Theme(DARKTHEME, LIGHTTHEME);
+theme.updateUI(localStorage.currentTheme);
+
+const changeThemeBtn = document.querySelector('.changeTheme');
 changeThemeBtn.addEventListener('click', () => {
-    if(localStorage.currentTheme == darkTheme) { 
-        localStorage.currentTheme = lightTheme;
+  const currentTheme = localStorage.currentTheme === DARKTHEME ? (localStorage.currentTheme = LIGHTTHEME) : (localStorage.currentTheme = DARKTHEME);
 
-        iconBtnTheme.classList.remove("fa-sun");
-        iconBtnTheme.classList.add("fa-moon");
-    } else if (localStorage.currentTheme == lightTheme) {
-        localStorage.currentTheme = darkTheme;
-
-        iconBtnTheme.classList.remove("fa-moon");
-        iconBtnTheme.classList.add("fa-sun");
-    }
-
-    updateUi();
+  theme.updateUI(currentTheme);
 });
