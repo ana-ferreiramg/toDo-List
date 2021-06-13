@@ -35,20 +35,18 @@ function show(todos) {
     const checked = item.completed ? 'checked' : null;
     const li = document.createElement('li');
 
-    if (item.completed === true) {
-      li.classList.add('checked');
-    }
+    if (item.completed === true) li.classList.add('checked');
 
     li.innerHTML = `
-            <div data-key=${item.id}>
-                <input type="checkbox" class="checkbox" ${checked}>
-                ${item.task}
-            </div>
+      <div data-key=${item.id}>
+          <input type="checkbox" class="checkbox" ${checked}>
+          ${item.task}
+      </div>
 
-            <div class="delete-button" data-key=${item.id}>
-                <i class="delete-button fas fa-trash-alt"></i>
-            </div>
-        `;
+      <div class="delete-button" data-key=${item.id}>
+          <i class="delete-button fas fa-trash-alt"></i>
+      </div>
+    `;
 
     listTodos.append(li);
   });
@@ -70,13 +68,11 @@ function getFromLocalStorage() {
 
 function toogle(id) {
   todos.forEach((item) => (item.id == id ? (item.completed = !item.completed) : item.completed));
-
   saveToStorage(todos);
 }
 
 function deleteTodo(id) {
   todos = todos.filter((item) => item.id != id);
-
   saveToStorage(todos);
 }
 getFromLocalStorage();
